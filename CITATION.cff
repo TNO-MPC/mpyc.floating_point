@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+license: Apache-2.0
+message: If you use this software, please cite it using these metadata.
+authors:
+  - name: TNO PET Lab
+    city: The Hague
+    country: NL
+    email: petlab@tno.nl
+    website: https://pet.tno.nl
+type: software
+url: https://pet.tno.nl
+contact:
+  - name: TNO PET Lab
+    city: The Hague
+    country: NL
+    email: petlab@tno.nl
+    website: https://pet.tno.nl
+repository-code: https://github.com/TNO-MPC/mpyc.floating_point
+repository-artifact: https://pypi.org/project/tno.mpc.mpyc.floating_point
+title: TNO PET Lab - secure Multi-Party Computation (MPC) - MPyC - Floating Point
+version: 0.13.0
+date-released: 2024-12-06

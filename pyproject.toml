@@ -1,0 +1,98 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tno.mpc.mpyc.floating_point"
+description = "Implementation of secure floating point numbers for MPyC"
+readme = "README.md"
+authors = [{name = "TNO PET Lab", email = "petlab@tno.nl"}]
+maintainers = [{name = "TNO PET Lab", email = "petlab@tno.nl"}]
+keywords = [
+    "TNO",
+    "MPC",
+    "multi-party computation",
+    "MPyC",
+    "secure floating point",
+]
+license = {text = "Apache License, Version 2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "Typing :: Typed",
+    "Topic :: Security :: Cryptography",
+]
+urls = { Homepage = "https://pet.tno.nl/", Documentation = "https://docs.pet.tno.nl/mpc/mpyc/floating_point/0.13.0", Source = "https://github.com/TNO-MPC/mpyc.floating_point" }
+dynamic = ["version"]
+requires-python = ">=3.9"
+dependencies = [
+    "mpyc~=0.10.0",
+    "tno.mpc.mpyc.stubs>=2.5.0",  # all stubs compatible with the mpyc constraint are valid
+    "typing_extensions; python_version<'3.10'",
+]
+
+[project.optional-dependencies]
+gmpy = [
+    "gmpy2>=2.1.0",
+]
+tests = [
+    "pytest>=8.1",
+    "pytest-asyncio",
+]
+
+[tool.setuptools]
+platforms = ["any"]
+
+[tool.setuptools.dynamic]
+version = {attr = "tno.mpc.mpyc.floating_point.__version__"}
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.coverage.run]
+branch = true
+omit = ["*/test/*"]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+
+[tool.isort]
+profile = "black"
+known_tno = "tno"
+known_first_party = "tno.mpc.mpyc.floating_point"
+sections = "FUTURE,STDLIB,THIRDPARTY,TNO,FIRSTPARTY,LOCALFOLDER"
+no_lines_before = "LOCALFOLDER"
+
+[tool.mypy]
+mypy_path = "src,stubs"
+strict = true
+show_error_context = true
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.tbump.version]
+current = "0.13.0"
+regex = '''
+\d+\.\d+\.\d+(-(.*))?
+'''
+
+[tool.tbump.git]
+message_template = "Bump to {new_version}"
+tag_template = "v{new_version}"
+
+    [[tool.tbump.file]]
+    src = "pyproject.toml"
+    search = "current = \"{current_version}\""
+
+    [[tool.tbump.file]]
+    src = "src/tno/mpc/mpyc/floating_point/__init__.py"
+    search = "__version__ = \"{current_version}\""
+
+    [[tool.tbump.file]]
+    src = "CITATION.cff"
+    search = "version: {current_version}"
